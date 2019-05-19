@@ -8,12 +8,24 @@ function checkCashRegister(price, cash, cid) {
       let cashRegister = { status: '', change: cid};
       const changeNeeded = parseFloat(cash - price).toFixed(2);
       const changeAvailable = getTotalCashRegisterChange(cid);
-      console.log(changeNeeded)
       cashRegister.status = getTotalCashRegisterStatus(changeNeeded, changeAvailable);
+      console.log(cashRegister.status)
+
+      if(cashRegister.status === REGISTER_STATUS.insufficientFunds) {
+            cashRegister.change = [];
+
+            return cashRegister;
+      }
 }
 
 function getTotalCashRegisterStatus(changeNeeded, changeAvailable){
-
+    if(Number(changedNeeded) > Number(changeAvailable)) {
+          return REGISTER_STATUS.insufficientFunds;
+    }
+    if(Number(changedNeeded) > Number(changeAvailable)) {
+      return REGISTER_STATUS.open;
+}
+    return REGISTER_STATUS.closed;
 }
 
 function getTotalCashRegisterChange(changeInDrawer) {
